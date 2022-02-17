@@ -106,7 +106,6 @@ class DOMManager{
          
     static addProblem(id){
         for (let patient of this.patients){
-            console.log("Hooray in the for loop")
             if(patient._id == id){
               patient.problems.push(new Problem($(`#${patient._id}-problem-name`).val(), $(`#${patient._id}-problem-age`).val()));
                 PatientService.updatePatient(patient)
@@ -118,11 +117,11 @@ class DOMManager{
         }
     }
 
-    static deleteProblem(patientId, problemId){
+    static deleteProblem(patientId, problemName){
         for(let patient of this.patients){
             if(patient._id ==patientId){
                 for(let problem of patient.problems){
-                    if(problem._id == problemId){
+                    if(problem.name == problemName){
                         patient.problems.splice(patient.problems.indexOf(problem),1);
                         PatientService.updatePatient(patient)
                         .then(() => {
@@ -143,7 +142,7 @@ class DOMManager{
         $('#patientApp').prepend(
             `<div id="${patient._id}" class="card">
                 <div class="card-header">
-                <h2>${patient.patient}</h2>
+                <h2>${patient.name}</h2>
                 <button class="btn btn-danger" onclick="DOMManager.deletePatient('${patient._id}')">Delete</button>
                 </div> 
                     <div class="card-body">
@@ -187,5 +186,3 @@ $('#create-new-patient').click(() => {
        });
 
 DOMManager.getAllPatients();   
-
-
