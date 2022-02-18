@@ -174,9 +174,6 @@ class DOMManager{
     }
 }
 }
-
-  
-        
  
     
 $('#create-new-patient').click(() => {
